@@ -6,11 +6,11 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { StatusBar } from 'expo-status-bar';
 
 import TopBar from './MainScreen/TopBar';
-import NextUp from './MainScreen/NextUp';
 import ScheduleList from './MainScreen/ScheduleList';
 import ViewToggle from './MainScreen/ViewToggle';
 import AddEvent from './Screens/AddEvent';
 import ImportSchedule from './Screens/ImportSchedule';
+import CalendarView from './CalanderView/CalanderView';
 
 // Create Stack Navigator
 const Stack = createNativeStackNavigator();
@@ -24,7 +24,7 @@ function HomeScreen() {
       <TopBar />
       <ScrollView contentContainerStyle={styles.content}>
         <ViewToggle activeView={view} onChange={setView} />
-        {view === 'schedule' ? <ScheduleList /> : <NextUp />}
+        {view === 'schedule' ? <ScheduleList /> : <CalendarView />}
       </ScrollView>
       <StatusBar style="auto" />
     </SafeAreaView>
