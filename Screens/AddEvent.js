@@ -1,3 +1,4 @@
+import { useNavigation } from '@react-navigation/native'
 import React, { useState, useEffect } from 'react';
 import {
   SafeAreaView,
@@ -11,6 +12,7 @@ import { Ionicons } from '@expo/vector-icons'; // For clock icon, use expo or an
 
 export default function AddEvent() {
   // State
+  const navigation = useNavigation()
   const [currentTime, setCurrentTime] = useState('');
   const [view, setView] = useState('calendar'); // calendar or schedule
   const [eventTitle, setEventTitle] = useState('');
@@ -36,6 +38,12 @@ export default function AddEvent() {
 
   return (
     <SafeAreaView style={styles.container}>
+  <View style={styles.backContainer}>
+   <TouchableOpacity onPress={() => navigation.goBack()}>
+    <Ionicons name="arrow-back" size={24} color="#4B46E4" />
+   </TouchableOpacity>
+  </View>
+
       {/* Header */}
       <View style={styles.header}>
         <View style={styles.logoContainer}>
@@ -59,10 +67,14 @@ export default function AddEvent() {
             <Text style={styles.addEventTxt}>Add Event</Text>
           </TouchableOpacity>
 
-          <TouchableOpacity style={styles.importBtn}>
+          <TouchableOpacity
+            style={styles.importBtn}
+            onPress={() => navigation.navigate('ImportSchedule')}
+          >
             <Ionicons name="cloud-upload-outline" size={18} color="white" />
             <Text style={styles.importTxt}>Import Schedule</Text>
           </TouchableOpacity>
+
         </View>
       </View>
 
@@ -148,9 +160,13 @@ export default function AddEvent() {
             <Text style={styles.addBtnText}>Add Event</Text>
           </TouchableOpacity>
 
-          <TouchableOpacity style={styles.cancelBtn}>
+          <TouchableOpacity
+            style={styles.cancelBtn}
+            onPress={() => navigation.navigate('Home')}
+          >
             <Text style={styles.cancelBtnText}>Cancel</Text>
           </TouchableOpacity>
+
         </View>
       </View>
     </SafeAreaView>
@@ -339,16 +355,23 @@ const styles = StyleSheet.create({
 
   cancelBtn: {
     backgroundColor: '#F0F0F0',
-    flex: 0.5,
+    flex: 1, 
     borderRadius: 8,
     paddingVertical: 14,
     justifyContent: 'center',
     alignItems: 'center',
-  },
+},
 
   cancelBtnText: {
     color: '#333',
     fontWeight: '600',
     fontSize: 16,
   },
+
+  backContainer: {
+  marginBottom: 10,
+  marginTop: 10,
+  paddingLeft: 10,
+},
+
 });
