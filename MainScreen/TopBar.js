@@ -1,27 +1,31 @@
+
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 export default function TopBar() {
+
   const navigation = useNavigation();
 
   return (
     <View style={styles.container}>
       <Text style={styles.title}>ClassSync</Text>
       <View style={styles.buttonsContainer}>
-        <TouchableOpacity 
-          style={styles.button} 
-          onPress={() => navigation.navigate('AddEvent')} // Navigate to AddEvent screen
-        >
-          <Text style={styles.buttonText}>Add Event</Text>
-        </TouchableOpacity>
 
         <TouchableOpacity 
-          style={[styles.button, styles.importButton]} 
-          //onPress={() => navigation.navigate('ImportSchedule')} Navigate to ImportSchedule screen
+          style={styles.button} 
+          onPress={() => navigation.navigate('AddEvent')}
         >
-          <Text style={styles.importButtonText}>Import Schedule</Text>
+         <Text style={styles.buttonText}>Add Event</Text>
         </TouchableOpacity>
+
+        <TouchableOpacity
+           style={[styles.button, styles.importButton]}
+           onPress={() => navigation.navigate('ImportSchedule')} 
+        >
+           <Text style={styles.importButtonText}>Import Schedule</Text>
+        </TouchableOpacity>
+
       </View>
     </View>
   );

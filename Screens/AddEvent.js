@@ -67,10 +67,14 @@ export default function AddEvent() {
             <Text style={styles.addEventTxt}>Add Event</Text>
           </TouchableOpacity>
 
-          <TouchableOpacity style={styles.importBtn}>
+          <TouchableOpacity
+            style={styles.importBtn}
+            onPress={() => navigation.navigate('ImportSchedule')}
+          >
             <Ionicons name="cloud-upload-outline" size={18} color="white" />
             <Text style={styles.importTxt}>Import Schedule</Text>
           </TouchableOpacity>
+
         </View>
       </View>
 
