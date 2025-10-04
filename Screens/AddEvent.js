@@ -339,12 +339,12 @@ const styles = StyleSheet.create({
 
   cancelBtn: {
     backgroundColor: '#F0F0F0',
-    flex: 0.5,
+    flex: 1, 
     borderRadius: 8,
     paddingVertical: 14,
     justifyContent: 'center',
     alignItems: 'center',
-  },
+},
 
   cancelBtnText: {
     color: '#333',
