@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons'; // For clock icon, use expo or any icon lib
 
-export default function AddEvent() {
+export default function AddEvent({ route, navigation }) {
   // State
   const [currentTime, setCurrentTime] = useState('');
   const [view, setView] = useState('calendar'); // calendar or schedule
@@ -18,7 +18,7 @@ export default function AddEvent() {
   const [location, setLocation] = useState('');
   const [startTime, setStartTime] = useState('');
   const [endTime, setEndTime] = useState('');
-
+  const { date: selectedDate } = route.params || {}
   // Update current time every minute
   useEffect(() => {
     const updateTime = () => {
@@ -144,9 +144,16 @@ export default function AddEvent() {
         </View>
 
         <View style={styles.buttonRow}>
-          <TouchableOpacity style={styles.addBtn}>
+
+          <TouchableOpacity
+            style={styles.addBtn}
+            onPress={() => {
+              navigation.navigate('Home', { newEvent: { date: selectedDate, title: eventTitle } })
+             }}
+          >
             <Text style={styles.addBtnText}>Add Event</Text>
           </TouchableOpacity>
+
 
           <TouchableOpacity style={styles.cancelBtn}>
             <Text style={styles.cancelBtnText}>Cancel</Text>
