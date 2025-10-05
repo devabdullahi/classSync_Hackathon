@@ -1,25 +1,31 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { Calendar } from 'react-native-calendars';
+import { useNavigation } from '@react-navigation/native';
 
 const CalendarView = () => {
   const [selected, setSelected] = useState('');
+  const lastClick = useRef(0);
+  const navigation = useNavigation();
+
+  const handleDayPress = (day) => {
+    const now = Date.now();
+    if (now - lastClick.current < 400) {
+      // Double tap detected
+      navigation.navigate('AddEvent', { date: day.dateString });
+    }
+    lastClick.current = now;
+    setSelected(day.dateString);
+  };
 
   return (
     <Calendar
-      // Customize the appearance
       style={{
         borderWidth: 1,
         borderColor: 'gray',
         height: 350,
       }}
-      // Set the current date
       current={new Date().toISOString().split('T')[0]}
-      // Update selected date dynamically
-      onDayPress={day => {
-        console.log('Selected day', day.dateString);
-        setSelected(day.dateString);
-      }}
-      // Highlight selected date
+      onDayPress={handleDayPress}
       markedDates={{
         [selected]: { selected: true, selectedColor: 'blue' },
       }}
